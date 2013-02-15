@@ -60,26 +60,18 @@
 </ol><pre><code>- Note: `kHarpyAlertType` is set to `AlertType_Option` by default. 
 - To force the user to update your app on launch, set `kHarpyAlertType` to `AlertType_Force`
 - To allow the user to forego seeing alerts for current AppStore version, set `kHarpyAlertType` to `AlertType_Skip`
-- To have an alert pop up each time the application launches from a full shutdown (e.g., no background), keep the default setting (`KHarpyAlertType == AlertType_Option`).  
+- To have an alert pop up each time the application launches from a full shutdown (e.g., not background), keep the default setting (`KHarpyAlertType == AlertType_Option`).  
 </code></pre>
 
 <ol>
-<li> In your <strong>AppDelegate.m</strong>, add <strong>only one</strong> of the following methods:
+<li> In your <strong>AppDelegate.m</strong>, add <strong>only one</strong> of the following methods:</li>
+</ol><pre><code>- `[Harpy checkVersion]` after makeKeyAndVisible is called in `application:didFinishLaunchingWithOptions:`
+- `[Harpy checkVersionDaily]` in `applicationDidBecomeActive:`
+- `[Harpy checkVersionWeekly]` in `applicationDidBecomeActive:`
+- **NOTE: Call only one of the Harpy methods, as they all perform a check on your application's first launch. Using multiple methods will result in multiple UIAlertViews to pop.**
+</code></pre>
 
-<ul>
-<li>
-<code>[Harpy checkVersion]</code> after makeKeyAndVisible is called on your UIWindow iVar in <code>application:didFinishLaunchingWithOptions:</code>
-</li>
-<li>
-<code>[Harpy checkVersionDaily]</code> in <code>applicationDidBecomeActive:</code>
-</li>
-<li>
-<code>[Harpy checkVersionWeekly]</code> in <code>applicationDidBecomeActive:</code>
-</li>
-<li><strong>NOTE: Call only one of the Harpy methods, as they all perform a check on your application's first launch. Using multiple methods will result in multiple UIAlertViews to pop.</strong></li>
-</ul>
-</li>
-</ol><pre>
+<pre>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
