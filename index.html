@@ -1,48 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Harpy by ArtSabintsev</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <title>Harpy by ArtSabintsev</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/ArtSabintsev/Harpy">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/ArtSabintsev/Harpy/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/ArtSabintsev/Harpy/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+    <header>
+      <div class="inner">
+        <h1>Harpy</h1>
+        <h2>Notify users that a new version of your iOS app is available, and prompt them with the AppStore link</h2>
+        <a href="https://github.com/ArtSabintsev/Harpy" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Harpy</h1>
-          <p>Notify users that a new version of your iOS app is available, and prompt them with the AppStore link</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/ArtSabintsev">ArtSabintsev</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h2>About</h2>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>About</h3>
 
 <p><strong>Harpy</strong> is a utility that checks a user's currently installed version of your iOS application against the version that is currently available in the AppStore. If a new version is available, an instance of UIAlertView is presented to the user informing them of the newer version, and giving them the option to update the application.</p>
 
-<h2>Screenshots</h2>
+<h3>Screenshots</h3>
 
 <ul>
 <li>The <strong>left picture</strong> forces the user to update the app.</li>
@@ -51,27 +41,21 @@
 <li>This option is configurable in <strong>HarpyConstants.h</strong>.</li>
 </ul><p><img src="https://github.com/ArtSabintsev/Harpy/blob/master/picForcedUpdate.png?raw=true" alt="Forced Update" title="Forced Update"><img src="https://github.com/ArtSabintsev/Harpy/blob/master/picOptionalUpdate.png?raw=true" alt="Optional Update" title="Optional Update"><img src="https://github.com/ArtSabintsev/Harpy/blob/master/picSkippedUpdate.png?raw=true" alt="Skipped Update" title="Optional Update"></p>
 
-<h2>Installation Instructions:</h2>
+<h3>Installation Instructions:</h3>
 
 <ol>
 <li><p>Copy the 'Harpy' folder into your Xcode project.</p></li>
 <li><p>Import <strong>Harpy.h</strong> into your AppDelegate or Pre-Compiler Header (.pch)</p></li>
 <li><p>Configure the static variables in <strong>HarpyConstants.h</strong>, and remove the <code>#warning</code> after customizing said variables. </p></li>
-</ol><pre><code>- Note: `kHarpyAlertType` is set to `AlertType_Option` by default. 
-- To force the user to update your app on launch, set `kHarpyAlertType` to `AlertType_Force`
-- To allow the user to forego seeing alerts for current AppStore version, set `kHarpyAlertType` to `AlertType_Skip`
-- To have an alert pop up each time the application launches from a full shutdown (e.g., not background), keep the default setting (`KHarpyAlertType == AlertType_Option`).  
-</code></pre>
+<li><p>Choose the approriate alert display by modifying <code>kHarpyAlertType</code> (default: <code>kAlertType_Option</code>`) in <strong>HarpyConstants.h</strong>.</p></li>
+<li>
+<p>In your <strong>AppDelegate.m</strong>, add <strong>only one</strong> of the <code>checkVersion</code> methods.  </p>
 
-<ol>
-<li> In your <strong>AppDelegate.m</strong>, add <strong>only one</strong> of the following methods:</li>
-</ol><pre><code>- `[Harpy checkVersion]` after makeKeyAndVisible is called in `application:didFinishLaunchingWithOptions:`
-- `[Harpy checkVersionDaily]` in `applicationDidBecomeActive:`
-- `[Harpy checkVersionWeekly]` in `applicationDidBecomeActive:`
-- **NOTE: Call only one of the Harpy methods, as they all perform a check on your application's first launch. Using multiple methods will result in multiple UIAlertViews to pop.**
-</code></pre>
-
-<pre>
+<ul>
+<li><strong>NOTE: Call only one of the Harpy methods, as they all perform a check on your application's first launch. Using multiple methods will result in multiple UIAlertViews to pop.</strong></li>
+</ul>
+</li>
+</ol><pre>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
@@ -108,15 +92,15 @@
 
 <p>And you're all set!</p>
 
-<h2>Important Note on AppStore Submissions</h2>
+<h3>Important Note on AppStore Submissions</h3>
 
 <ul>
 <li>The AppStore reviewer will <strong>not</strong> see the alert. </li>
-</ul><h2>Release Notes (v2.2.0):</h2>
+</ul><h3>Release Notes (v2.2.0):</h3>
 
 <ul>
 <li>Added third option that allows users to skip seeing alerts for current AppStore version</li>
-</ul><h2>Contributors</h2>
+</ul><h3>Contributors</h3>
 
 <ul>
 <li>
@@ -127,11 +111,11 @@
 <a href="https://github.com/joshuatbrown">Josh T. Brown</a> in v2.0.0</li>
 <li>
 <a href="https://github.com/pius">Pius Uzamere</a> in v1.0.1</li>
-</ul><h2>Recognition:</h2>
+</ul><h3>Recognition:</h3>
 
 <p>Created by <a href="http://www.sabintsev.com">Arthur Ariel Sabintsev</a>  </p>
 
-<h2>License</h2>
+<h3>License</h3>
 
 <p>The MIT License (MIT)
 Copyright (c) 2012 Arthur Ariel Sabintsev</p>
@@ -141,11 +125,26 @@ Copyright (c) 2012 Arthur Ariel Sabintsev</p>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-      </section>
+        </section>
 
+        <aside id="sidebar">
+          <a href="https://github.com/ArtSabintsev/Harpy/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ArtSabintsev/Harpy/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/ArtSabintsev/Harpy"></a> is maintained by <a href="https://github.com/ArtSabintsev">ArtSabintsev</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
