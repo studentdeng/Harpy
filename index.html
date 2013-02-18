@@ -53,13 +53,13 @@
 
 <h3>Installation Instructions:</h3>
 
-<p><strong>Note: Harpy utilizes ARC. Add the <em>-fobjc-arc</em> compiler flag in the build phases tab</strong></p>
+<p><strong>Note: Harpy utilizes ARC. Add the <em>-fobjc-arc</em> compiler flag in the build phases tab if your project doesn't use ARC</strong>.</p>
 
 <ol>
 <li><p>Copy the 'Harpy' folder into your Xcode project.</p></li>
 <li><p>Import <strong>Harpy.h</strong> into your AppDelegate or Pre-Compiler Header (.pch)</p></li>
 <li><p>Configure the static variables in <strong>HarpyConstants.h</strong>, and remove the <code>#warning</code> after customizing said variables. </p></li>
-<li><p>Choose the approriate alert display by modifying <code>kHarpyAlertType</code> (default: <code>kAlertType_Option</code>`) in <strong>HarpyConstants.h</strong>.</p></li>
+<li><p>Choose the approriate alert display by modifying <code>kHarpyAlertType</code> (default: <code>kAlertType_Option</code>) in <strong>HarpyConstants.h</strong>.</p></li>
 <li>
 <p>In your <strong>AppDelegate.m</strong>, add <strong>only one</strong> of the <code>checkVersion</code> methods.  </p>
 
