@@ -164,15 +164,17 @@ static NSDate *lastVersionCheckPerformedOnDate;
 {
     
     // Reference App's name
-    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
     
     switch ( kHarpyAlertType ) {
             
         case AlertType_Force: {
             
+            NSString *message =
+                [NSString stringWithFormat:@"%@ 新版本 %@ 发布啦 请马上更新体验新功能.", appName, currentAppStoreVersion];
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kHarpyAlertViewTitle
-                                                                message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.", appName, currentAppStoreVersion]
+                                                                message:message
                                                                delegate:self
                                                       cancelButtonTitle:kHarpyUpdateButtonTitle
                                                       otherButtonTitles:nil, nil];
@@ -185,7 +187,7 @@ static NSDate *lastVersionCheckPerformedOnDate;
         case AlertType_Option: {
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kHarpyAlertViewTitle
-                                                                message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.", appName, currentAppStoreVersion]
+                                                                message:[NSString stringWithFormat:@"%@ 新版本 %@ 发布啦 请马上更新体验新功能.", appName, currentAppStoreVersion]
                                                                delegate:self
                                                       cancelButtonTitle:kHarpyCancelButtonTitle
                                                       otherButtonTitles:kHarpyUpdateButtonTitle, nil];
@@ -201,7 +203,7 @@ static NSDate *lastVersionCheckPerformedOnDate;
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kHarpyAlertViewTitle
-                                                                message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.", appName, currentAppStoreVersion]
+                                                                message:[NSString stringWithFormat:@"%@ 新版本 %@ 发布啦. 请马上更新体验新功能", appName, currentAppStoreVersion]
                                                                delegate:self
                                                       cancelButtonTitle:kHarpySkipButtonTitle
                                                       otherButtonTitles:kHarpyUpdateButtonTitle, kHarpyCancelButtonTitle, nil];

@@ -35,10 +35,10 @@ typedef NS_ENUM(NSUInteger, AlertType)
 #define kHarpyAppID                         @"573293275"
 
 /// 3. Customize the alert title and action buttons
-#define kHarpyAlertViewTitle                @"Update Available"
-#define kHarpyCancelButtonTitle             @"Next time"
-#define kHarpySkipButtonTitle               @"Skip this version"
-#define kHarpyUpdateButtonTitle             @"Update"
+#define kHarpyAlertViewTitle                @"新版本更新"//@"Update Available"
+#define kHarpyCancelButtonTitle             @"下一次更新"
+#define kHarpySkipButtonTitle               @"跳过"
+#define kHarpyUpdateButtonTitle             @"立刻更新"
 
 /************************/
 /** END CUSTOMIZATION ***/
